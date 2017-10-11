@@ -10,7 +10,7 @@ def rr(l, quantum):
         answd.append(False)
     firstcome = [0, 0, 0, 0]
 
-    i = 0
+    dic = dict(enumerate(l))
 
     while(len(l) or len(ready)):
         while(len(l) and l[0][0] <= time):
@@ -19,14 +19,19 @@ def rr(l, quantum):
         
         if(len(ready)):
             p = ready[0]
+            procid = 0
             ready.pop(0)
+
+            for pid, proc in dic.items():
+                if proc == p:
+                    procid = pid
 
             wait += time - p[0]
 
-            if(answd[i] != True):
-                firstcome[i] = p[0]
+            if(answd[procid] != True):
+                firstcome[procid] = p[0]
                 ans += time - p[0]
-                answd[i] = True
+                answd[procid] = True
 
             if(p[1] <= quantum):
                 time += p[1]
@@ -34,6 +39,8 @@ def rr(l, quantum):
             else:
                 time += quantum
                 p[1] -= quantum
+
+            dic[procid] = p
 
             while(len(l) and l[0][0] <= time):
                 ready.append(l[0])
@@ -43,13 +50,11 @@ def rr(l, quantum):
                 p[0] = time
                 ready.append(p)
             else:
-                ret += time - firstcome[i]
+                ret += time - firstcome[procid]
 
         else:
             time = ready[0][0]
-        
-        i = (i+1)%len(answd)
-
+    
 
     if(qtd > 0):
-        print "RR", (ret/qtd), ((ans + 2)/qtd), (wait/qtd)
+        print "RR", (ret/qtd), ((ans)/qtd), (wait/qtd)
