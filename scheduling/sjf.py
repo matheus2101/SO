@@ -34,8 +34,5 @@ def sjf(l):
             time += p[1]
             ret += time - p[0]
 
-        else:
-            time = priority[0][0]
-
     if(qtd > 0):
         print "SJF", (ret/qtd), (ans/qtd), (wait/qtd)

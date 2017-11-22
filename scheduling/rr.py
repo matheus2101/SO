@@ -6,9 +6,10 @@ def rr(l, quantum):
     qtd = len(l)
     ready = []
     answd = []
-    for element in l:
+    firstcome = []
+    for i in range(len(l)):
         answd.append(False)
-    firstcome = [0, 0, 0, 0]
+        firstcome.append(0)
 
     dic = dict(enumerate(l))
 
@@ -51,10 +52,6 @@ def rr(l, quantum):
                 ready.append(p)
             else:
                 ret += time - firstcome[procid]
-
-        else:
-            time = ready[0][0]
-    
 
     if(qtd > 0):
         print "RR", (ret/qtd), ((ans)/qtd), (wait/qtd)

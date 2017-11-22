@@ -5,7 +5,7 @@ def lru(l):
     l.pop(0)
     miss = 0
     count = []
-    for item in mem:
+    for i in range(len(mem)):
         count.append(0)
     clock = 0
 

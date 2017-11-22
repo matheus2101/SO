@@ -16,8 +16,5 @@ def fcfs(l):
             time += p[1]
             ret += time - p[0]
 
-        else:
-            time = l[0][0]
-
     if(qtd > 0):
         print "FCFS", (ret/qtd), (ans/qtd), (wait/qtd)
